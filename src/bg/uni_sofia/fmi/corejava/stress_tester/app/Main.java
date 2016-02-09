@@ -19,11 +19,10 @@ public class Main {
 			ExecutorService executor = Executors.newFixedThreadPool(requests);
 			CyclicBarrier cb = new CyclicBarrier(requests);
 			Worker w = new Worker(nst, cb);
-
 			for (int i = 0; i < requests; i++) {
 				executor.execute(w);
 			}
-
+			System.out.println(executor);
 			executor.shutdown();
 			executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
 			if (Worker.isBroken) {
@@ -31,14 +30,9 @@ public class Main {
 			}
 			requests++;
 
-			// for (int i = 0; i < 300; i++) {
-			// Runnable worker = new Worker(nst, cb);
-			// Thread t = new Thread(worker);
-			// t.start();
-			// }
 		}
 
-		System.out.println(requests);
+		System.out.println("Maximum number of requests : " + (requests - 1));
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, InterruptedException {
