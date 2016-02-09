@@ -27,16 +27,8 @@ public class RequestData {
 		return queryMethod;
 	}
 
-	public void setQueryMethod(String queryMethod) {
-		this.queryMethod = queryMethod;
-	}
-
 	public String getQueryHost() {
 		return queryHost;
-	}
-
-	public void setQueryHost(String queryHost) {
-		this.queryHost = queryHost;
 	}
 
 	public String getExpectedResponse() {
@@ -47,9 +39,6 @@ public class RequestData {
 		return hostName;
 	}
 
-	public void setHostName(String hostName) {
-		this.hostName = hostName;
-	}
 
 }
 

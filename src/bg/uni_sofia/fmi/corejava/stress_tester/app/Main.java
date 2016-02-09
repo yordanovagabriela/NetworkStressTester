@@ -13,26 +13,30 @@ public class Main {
 
 	public static void start() throws FileNotFoundException, IOException, InterruptedException {
 
-		NetworkStressTester nst = new NetworkStressTester(80, new File("recourses/request.txt"));
-		
+		RequestsManager requestManager = new RequestsManager(80, new File("recourses/request.txt"));
+
 		while (true) {
 			ExecutorService executor = Executors.newFixedThreadPool(requests);
-			CyclicBarrier cb = new CyclicBarrier(requests);
-			Worker w = new Worker(nst, cb);
+			CyclicBarrier barrier = new CyclicBarrier(requests);
+			NetworkStressWorker worker = new NetworkStressWorker(requestManager, barrier);
+
 			for (int i = 0; i < requests; i++) {
-				executor.execute(w);
+				executor.execute(worker);
 			}
-			System.out.println(executor);
+
 			executor.shutdown();
 			executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-			if (Worker.isBroken) {
+
+			if (NetworkStressWorker.isBroken) {
 				break;
 			}
+
 			requests++;
 
 		}
 
 		System.out.println("Maximum number of requests : " + (requests - 1));
+		System.out.println("Longest time for response : " + NetworkStressWorker.getLongestResponseTime() + "ms");
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, InterruptedException {
