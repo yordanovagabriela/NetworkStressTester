@@ -37,7 +37,7 @@ public class RequestsManager {
 			
 			//verify the response message
 			if (requestStatus.equals(requestData.getExpectedResponse())) {
-				System.out.println(requestStatus);
+				//System.out.println(requestStatus);
 			} else {
 				throw new UnexpectedResponse("The response was unexpected!");
 			}

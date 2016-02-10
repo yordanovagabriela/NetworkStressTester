@@ -20,10 +20,11 @@ public class Main {
 			CyclicBarrier barrier = new CyclicBarrier(requests);
 			NetworkStressWorker worker = new NetworkStressWorker(requestManager, barrier);
 
+			System.out.println("Trying to send " + requests + " requests to the server ...");
 			for (int i = 0; i < requests; i++) {
 				executor.execute(worker);
 			}
-
+			//System.out.println(executor.toString());
 			executor.shutdown();
 			executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
 
@@ -31,6 +32,7 @@ public class Main {
 				break;
 			}
 
+			System.out.println("The requests were send successfuly ... \n");
 			requests++;
 
 		}

@@ -36,7 +36,8 @@ public class NetworkStressWorker implements Runnable {
 				}
 			}
 		} catch (UnexpectedResponse | IOException ex) {
-			System.out.println("Sorry.The request unsuccessful");
+			System.out.println("The reqeust could not be sent.");
+			System.out.println(ex.getMessage());
 			isBroken = true;
 		}
 
