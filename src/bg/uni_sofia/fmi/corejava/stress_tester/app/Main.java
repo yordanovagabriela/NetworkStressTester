@@ -20,11 +20,12 @@ public class Main {
 			CyclicBarrier barrier = new CyclicBarrier(requests);
 			NetworkStressWorker worker = new NetworkStressWorker(requestManager, barrier);
 
-			System.out.println("Trying to send " + requests + " requests to the server ...");
+			System.out.printf("Trying to send %d requests to the server ... ", requests);
+
 			for (int i = 0; i < requests; i++) {
 				executor.execute(worker);
 			}
-			//System.out.println(executor.toString());
+
 			executor.shutdown();
 			executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
 
@@ -32,13 +33,13 @@ public class Main {
 				break;
 			}
 
-			System.out.println("The requests were send successfuly ... \n");
+			System.out.println("The requests were sent successfuly! \n");
 			requests++;
 
 		}
 
-		System.out.println("Maximum number of requests : " + (requests - 1));
-		System.out.println("Longest time for response : " + NetworkStressWorker.getLongestResponseTime() + "ms");
+		System.out.printf("Maximum number of requests : %d \n", (requests - 1));
+		System.out.printf("Longest time for response : %d ms \n", NetworkStressWorker.getLongestResponseTime());
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, InterruptedException {

@@ -20,9 +20,9 @@ public class RequestsManager {
 
 	public void sendRequest() throws UnexpectedResponse, IOException {
 
-		//create Socket to communicate with the server
-		//PrintWriter - to send messages to the server
-		//BufferedReader - to get messages/response from the server
+		// create Socket to communicate with the server
+		// PrintWriter - to send messages to the server
+		// BufferedReader - to get messages/response from the server
 		try (Socket s = new Socket(this.requestData.getHostName(), this.port);
 				PrintWriter pw = new PrintWriter(s.getOutputStream());
 				BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()))) {
@@ -32,13 +32,11 @@ public class RequestsManager {
 			pw.println(requestData.getQueryHost());
 			pw.println("");
 			pw.flush();
-			
+
 			String requestStatus = br.readLine();
-			
-			//verify the response message
-			if (requestStatus.equals(requestData.getExpectedResponse())) {
-				//System.out.println(requestStatus);
-			} else {
+
+			// verify the response message
+			if (!requestStatus.equals(requestData.getExpectedResponse())) {
 				throw new UnexpectedResponse("The response was unexpected!");
 			}
 		}
@@ -48,7 +46,7 @@ public class RequestsManager {
 	public int getPort() {
 		return port;
 	}
-	
+
 	public RequestData getRequestData() {
 		return this.requestData;
 	}

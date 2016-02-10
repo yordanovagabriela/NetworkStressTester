@@ -1,4 +1,4 @@
-package bg.uni_sofia.fmi.corejava.stress_tester.tests;
+package bg.uni_sofia.fmi.corejava.stress_tester.app;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,8 +7,6 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
-import bg.uni_sofia.fmi.corejava.stress_tester.app.RequestData;;
 
 public class RequestDataTests {
 	private RequestData requestData;

@@ -36,8 +36,9 @@ public class NetworkStressWorker implements Runnable {
 				}
 			}
 		} catch (UnexpectedResponse | IOException ex) {
-			System.out.println("The reqeust could not be sent.");
+			System.out.println("The request could not be sent.");
 			System.out.println(ex.getMessage());
+
 			isBroken = true;
 		}
 
@@ -49,7 +50,7 @@ public class NetworkStressWorker implements Runnable {
 			barrier.await();
 			this.sendRequest();
 		} catch (BrokenBarrierException | InterruptedException ex) {
-			//ex.printStackTrace();
+			ex.printStackTrace();
 		}
 
 	}
