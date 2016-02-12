@@ -29,7 +29,8 @@ public class Main {
 			executor.shutdown();
 			executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
 
-			if (NetworkStressWorker.isBroken) {
+			
+			if (NetworkStressWorker.isBroken.get()) {
 				break;
 			}
 

@@ -23,17 +23,17 @@ public class RequestsManager {
 		// create Socket to communicate with the server
 		// PrintWriter - to send messages to the server
 		// BufferedReader - to get messages/response from the server
-		try (Socket s = new Socket(this.requestData.getHostName(), this.port);
-				PrintWriter pw = new PrintWriter(s.getOutputStream());
-				BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()))) {
-
+		try (Socket socket = new Socket(this.requestData.getHostName(), this.port);
+				PrintWriter writer = new PrintWriter(socket.getOutputStream());
+				BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+			
 			// send request
-			pw.println(requestData.getQueryMethod());
-			pw.println(requestData.getQueryHost());
-			pw.println("");
-			pw.flush();
+			writer.println(requestData.getQueryMethod());
+			writer.println(requestData.getQueryHost());
+			writer.println("");
+			writer.flush();
 
-			String requestStatus = br.readLine();
+			String requestStatus = reader.readLine();
 
 			// verify the response message
 			if (!requestStatus.equals(requestData.getExpectedResponse())) {
